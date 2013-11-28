@@ -1,0 +1,103 @@
+# Aliases
+alias sudo='sudo '   # make aliases work whit sudo
+
+
+
+## Modified commands ## {{{
+alias grep='grep --color=auto'  # color
+alias cp='cp -R --reflink=auto' # use copy on write for btrfs
+alias less='less -M'            # log prompt
+alias mkdir='mkdir -p'          # make parent dir as neaded
+alias df='df -h'
+alias du='du -c -h'
+alias dmesg='dmesg -HL'
+# }}}
+
+
+
+## Short form ## {{{
+alias ap='realpath'    # '[a]bsolut [p]at'
+alias s='source'       # '[s]ource'
+alias t='touch'        # '[t]ouch'
+alias e='vim'          # '[e]dit'
+alias v='vim'          # '[v]im'
+alias open='xdg-open'  # 'N/A'
+# }}}
+
+
+
+## New commands ## {{{
+alias 644='chmod 644'             # 'rw- r-- r--'           - makes the umask of given file 644
+alias 755='chmod 755'             # 'rwx r-x r-x'           - makes the umask of ginen file 755
+alias mro='sudo chown root:root'  # '[m]ake [r]oot [o]wner' - makes the user and grop of given file root root
+alias mx='chmod +x'               # '[m]ake e[x]ecutebal'   - makes file executebal
+alias mux='chmod u+x'             # '[m]ake [u]ser e[x]ecutebal' - make file executebal for user
+alias wi='whence -p'              # '[w]here [i]s'          - like which i bash 
+alias clr='printf "\033c"'        # '[cl]ea[r]'             - clears the screan for real
+alias da='date "+%a %d %b %Y"'    # '[da]te'                - prints date
+alias ti='date "+%H:%M"'          # '[ti]me'                - prints time
+alias hstg='history | grep'       # '[h]i[st]ory [g]rep'    - serches history for given argument
+alias ping3='ping -c 3'           # 'N/A'                   - ping giwen URI 3 times
+alias edit='/usr/local/bin/edit'  # 'N/A'                   - opens nano and givs warning if user dosent have write prebision
+alias pg='ps -eo "%p     %U  %G  " -o stime -o "     %a"|grep' # '[p]rocess [g]rep' - serches proceses for given argument
+alias p='ps -eo "%p     %U  %G  " -o stime -o "     %a"'       # '[p]rocess'  - lists proceses and related inforation
+alias du1='du --max-depth=1'
+alias openports='ss --all --numeric --processes --ipv4 --ipv6' 
+alias openports4='ss --all --numeric --processes --ipv4'
+alias openports6='ss --all --numeric --processes --ipv6'
+# }}}
+
+
+## ls ## {{{
+alias ll='ls -hF --color=auto'   # '[l]ist [l]ong'     - list files and related information
+alias lr='ls -R --color=auto'    # '[l]ist recursive'  - lists files recursivly
+alias lc='ls -1 --color=auto'    # '[l]ist [c]olumn'   - list files in a column
+alias lal='ls -AhF --color=auto' # '[l]ist [a]ll [l]ong'      - lists files and related information (icl. hide files)
+alias lar='ls -AR --color=auto'  # '[l]ist [a]ll [r]ecursi'   - lists files recursivly (icl. hide files)
+alias lac='ls -A1 --color=auto'  # '[l]ist [a]ll [c]olumn'    - lists files in a column (icl. hide files)
+alias lg='ls|grep -i'            # '[l]ist [g]rep'         - serches files for given argument 
+alias lag='ls -A|grep -i'        # '[l]ist [a]ll  [g]rep'  - serches files for given argument (icl. hide files)
+alias lrg='ls -R|grep -i'        # '[l]ist [r]ecurciv [g]rep'        - serches files recursivly for given argument 
+alias larg='ls -RA|grep -i'      # '[l]ist [a]ll [r]ecursiv [g]rep'  - serches files recursivly for given argument (icl. hide files)
+# }}}
+
+
+
+## Pacman aliases ## {{{
+#if necessary, replace 'pacman' with your favorite AUR helper and adapt the commands accordingly
+alias pac="sudo /usr/bin/pacman -S"       # 'default action'      - install one or more packages
+alias pacU="sudo /usr/bin/pacman -U"      # '[U]RI'               - install one or more packages from URI (local or remote)
+alias pacu="sudo /usr/bin/pacman -Syu"    # '[u]pdate'            - upgrade all packages to their newest version
+alias pacud="sudo /usr/bin/pacman -Syy"   # '[update] [d]atabase' - force update chache
+alias pacr="sudo /usr/bin/pacman -Rns"    # '[r]emove'            - uninstall one or more packages
+alias pacs="/usr/bin/pacman -Ss"          # '[s]earch'            - search for a package using one or more keywords
+alias paci="/usr/bin/pacman -Si"          # '[i]nfo'              - show information about a package
+alias pacl="/usr/bin/pacman -Ql"          # '[l]ist [f]iles'      - list all files installed by a given package
+alias paclo="/usr/bin/pacman -Qdt"        # '[l]ist [o]rphans'    - list all packages which are orphaned
+alias paclp="pacman -Q"                   # '[l]ist [p]ackages'   - lists instaed packages
+alias pacllp="pacman -Qm"                 # '[l]ist [l]ocal [p]ackages' - lists localy instaed packages
+alias pacw="/usr/bin/pacman -Qo"          # '[w]hos'              - waht pacage owns given file
+alias pacc="sudo /usr/bin/pacman -Sc"     # '[c]lean cache'       - delete all not currently installed package files from chache
+alias pacc="sudo /usr/bin/pacman -Scc"    # '[c]lean cache'       - delete all package files from chace
+alias pacllp="pacman -Qm"                 # '[l]ist [l]ocal [p]ackages'  - lists localy instaed packages
+alias pacmx="/usr/bin/pacman -D --asexp"  # '[m]ark [e]xplicitly' - mark one or more packages as explicitly installed 
+alias pacmi="/usr/bin/pacman -D --asdep"  # '[m]ark [i]mplicitly' - mark one or more packages as non explicitly installed
+alias pacro="sudo /usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')" # '[r]emove [o]rphans'    - recursi$
+# }}}
+
+
+## aura aliases (all actions ar regarding AUR pkges) ## {{{
+alias aur="sudo /usr/bin/aura -Ax"        # 'default action'     - install one or more packages from AUR
+alias auru="sudo /usr/bin/aura -Ayu"      # '[u]pdate'           - upgrade all packages to their newest version
+alias auri="/usr/bin/aura -Ai"            # '[i]nfo'             - show information about a package
+alias aurs="/usr/bin/aura -As"            # '[s]earch'           - search for a package using one or more keywords
+alias aurlo="/usr/bin/aura -O"            # '[l]ist [o]rphans'   - list all packages which are orphaned
+alias aurro="sudo /usr/bin/aura -Oj"      # '[r]emove [o]rphans' - removes orphand pacages
+# }}}
+
+
+##  Powerpill aliases  ## {{{
+alias ppac="sudo /usr/bin/powerpill -S"       # 'default action'   - install one or more packages
+alias ppacu="sudo /usr/bin/powerpill -Syu"    # '[u]pdate'		   - upgrade all packages to their newest version
+alias ppacuc="sudo /usr/bin/powerpill -Syy"   # '[u]pdate [c]ache' - force update chache
+# }}}
