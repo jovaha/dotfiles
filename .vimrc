@@ -1,3 +1,4 @@
+" vim: foldmethod=marker
 " An example for a vimrc file.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
@@ -12,11 +13,19 @@
 " time out when leaving insert mode 
 set ttimeoutlen=50
 
-" look and feel
+" --- {{{1 folding 
+nnoremap <space> za
+vnoremap <space> za
+
+
+" --- {{{1 look and fell
+
+" color chea
 colorscheme jellybeans
 
 " menu for tab compleation in coman line
 set wildmenu
+
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
@@ -43,6 +52,7 @@ else
 endif
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
+set backupdir=~/.vim_backups/
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 

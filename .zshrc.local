@@ -50,11 +50,16 @@ compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' extract_arc
 autoload -U compinit
 compinit
 zstyle ':completion:*' menu select
+setopt menu_complete
 
+bindkey '^[' send-break 
+KEYTIMEOUT=1
 
 # print arch logo and system info
 echo
-/opt/screenfetch -c 4
+echo
+echo
+/opt/screenfetch -c 4,
 echo
 
 # make ^u cut bakwards from cursur like bash
