@@ -1,66 +1,23 @@
 " vim: foldmethod=marker
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" time out when leaving insert mode 
+" --- {{{1 unsorted
 set ttimeoutlen=50
-
-" --- {{{1 folding 
-nnoremap <space> za
-vnoremap <space> za
-
-
-" --- {{{1 look and fell
-
-" color chea
-colorscheme jellybeans
-
-" menu for tab compleation in coman line
-set wildmenu
-
-
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
-  
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set backupdir=~/.vim_backups/
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
 " Don't use Ex mode, use Q for formatting
 map Q gq
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -71,12 +28,6 @@ if has('mouse')
   set mouse=a
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -121,13 +72,64 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+ 
+" --- {{{1 backup
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
+set history=50		" keep 50 lines of command line history
+set backupdir=~/.vim_backups/
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+
+" --- {{{1 folding 
+nnoremap <space> za
+vnoremap <space> za
+
+
+" --- {{{1 look and fell
+" enable 256 colors
+set t_Co=256
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
 " number lines
 set number
 
+" color chea
+colorscheme jellybeans
+
+" menu for tab compleation in coman line
+set wildmenu
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+" show the cursor position all the time
+set ruler		
+
+
+
+
+
+
+
+" --- {{{1 maps
 " ctrl c to quit
 imap <C-c> <Esc>;q!<CR>
 nmap <C-c> ;q!<CR>
 
+" remap : and ;
+noremap ; :
+noremap ;; ;
+
+" --- {{{1 movments
 " move inside wraped bloks as if they where real lines
 function! ScreenMovement(movement)
    if &wrap
@@ -149,30 +151,12 @@ nnoremap <silent> <expr> $ ScreenMovement("$")
 nnoremap <silent> <expr> <Up> ScreenMovement("<Up>")
 nnoremap <silent> <expr> <Down> ScreenMovement("<Down>")
 
-" remap : and ;
-noremap ; :
-noremap ;; ;
 
 
-" airline config
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_detect_whitespace=0
-let g:airline#extensions#tabline#enabled = 1
+" --- {{{1 plugins
+" --- {{{2 vundel
 
-
-if !exists('g:airline_symbols')
-	  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-
-" enable 256 colors
-set t_Co=256
-
-" vundle
-set nocompatible              " be iMproved
 filetype off                  " required!
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -187,16 +171,19 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'tpope/vim-fugitive'
 Bundle 'bling/vim-airline'
-"
 
 filetype plugin indent on     " required!
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
+
+" --- {{{2 airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_detect_whitespace=0
+let g:airline#extensions#tabline#enabled = 1
+
+
+if !exists('g:airline_symbols')
+	  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
 
