@@ -43,6 +43,7 @@ alias larg='ls -RA|grep -i'      # [l]ist [a]ll [r]ecursiv [g]rep  - serches fil
 
 
 ## New commands ## {{{
+alias git-up='git push -u origin master'  # N/A - push master
 alias rmtmp='rm -rf ~/tmp/*'      # [r]e[m]ove [t]e[mp]orarie  - clears te tmp folder
 alias 644='chmod 644'             # rw- r-- r--           - makes the umask of given file 644
 alias 755='chmod 755'             # rwx r-x r-x           - makes the umask of ginen file 755
